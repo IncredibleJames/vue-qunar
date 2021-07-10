@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            firstName:"james",
+            lastName:"bond"
+        },
+        computed:{
+            fullName:{
+                get(){
+                    return this.firstName+" "+this.lastName;
+                },
+                set(value){
+                    let arr=value.split(' ');
+                    //在setter中间接地通过对计算属性fullName所依赖的属性的改变，进而改变了fullName的值
+                    this.firstName=arr[0];
+                    this.lastName=arr[arr.length-1];
+                }
+            }
+        }
+        /**
+         * vm.fullName='jack rose'; //页面会更新为jack rose
+         * 同时，vm.firstName和vm.lastName也更新为jack和rose了
+         * */
+    });
+</script>
+</body>
+</html>

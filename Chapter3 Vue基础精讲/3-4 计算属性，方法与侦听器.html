@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+    {{age}}
+</div>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            firstName:"james",
+            lastName:"bond",
+            fullName:"james bond",
+            age:28
+        },
+        watch:{
+            //watch和computed都具备缓存的机制，但是watch的写法比computed复杂很多
+            firstName(){
+                console.log("计算了一次");
+                this.fullName=this.firstName + " " + this.lastName;
+            },
+            lastName(){
+                console.log("计算了一次");
+                this.fullName=this.firstName + " " + this.lastName;
+            }
+        }
+        // methods:{
+        //     //使用方法时，每次更改age值都会触发页面重绘，都会调用fullName()方法，影响性能
+        //     fullName(){
+        //         console.log("计算了一次");
+        //         return this.firstName + " " + this.lastName;
+        //     }
+        // },
+        // computed:{
+        //     fullName(){
+                    //使用计算属性方式，只有该计算属性所依赖的属性值发生变化，才会触发重新计算，否则会优先使用缓存
+        //         console.log("计算了一次");
+        //         return this.firstName + " " + this.lastName;
+        //     }
+        // }
+        /**
+         * 综上，如果通过watch，methods,computed都可以实现，优先考虑使用computed
+         * */
+    })
+</script>
+</body>
+</html>

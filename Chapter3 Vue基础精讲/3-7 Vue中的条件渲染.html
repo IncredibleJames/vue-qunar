@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 示例1 -->
+    <!--<div v-if="show">{{message}}</div>
+    <div v-show="show">{{message}}</div>-->
+
+
+    <!-- 示例2 -->
+    <!--<div v-if="show==='a'">This is A</div>
+    <div v-else-if="show==='b'">This is B</div>
+    <div v-else>This is others</div>-->
+
+
+    <!-- 示例3 -->
+    <div v-if="show">
+        用户名 <input type="text" key="username" />
+    </div>
+    <div v-else>
+        邮箱名 <input type="text" key="email" />
+    </div>
+</div>
+<script>
+    /**
+     * 示例1
+     * 1.v-if和v-show的区别在于前者会在文档中移除/添加该DOM节点，而后者只是修改该DOM节点的display属性
+     * 2.对于需要频繁显示或隐藏的元素，使用v-show性能更好
+     *
+     * 示例2
+     * 3.v-if还可与v-else-if，v-else组合使用
+     * 4.v-if，v-else-if，v-else指令中间不可穿插其他dom节点
+     *
+     * 示例3
+     * 5.当show=true时显示用户名，为false显示邮箱名，此时会有bug，input中的值未清空，由于Vue的机制会帮助我们尽量复用页面上的dom,会尝试复用这个input
+     * 6.解决方法，在input标签中加上key值，使每一个input唯一，vue检查到它们key值不一样就不会复用以前的标签了，这样show值变化时会重新渲染页面的input
+     * （vue中虚拟DOM diff算法中的内容，高阶用法）
+     * */
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            show:false,//示例1，3
+            // show:'a',//示例2
+            message:'hello world'
+        }
+    });
+</script>
+</body>
+</html>

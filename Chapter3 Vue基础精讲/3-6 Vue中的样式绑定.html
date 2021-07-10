@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        .activated{
+            color:red;
+        }
+        .activated-one{
+            background-color:#ccc;
+        }
+    </style>
+</head>
+<body>
+<!--示例1：class的对象绑定-->
+<!--<div id="app"
+     @click="handleDivClick"
+    :class="{activated:isActivated}">
+    hello world
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            isActivated:false
+        },
+        methods:{
+            handleDivClick(){
+                this.isActivated=!this.isActivated;
+            }
+        }
+    });
+</script>-->
+<!--示例1：class的对象绑定 end-->
+
+
+<!--示例2：class的数组绑定，可绑定多个class类名-->
+<!--<div id="app"
+     @click="handleDivClick"
+     :class="[activated, activatedOne]">
+    hello world
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            activated:'',//此时activated是变量
+            activatedOne:'activated-one'
+        },
+        methods:{
+            handleDivClick(){
+                //变量activated的值等于"activated"时置为''，否则置为'activated'
+                this.activated = this.activated==="activated" ? "":"activated"
+            }
+        }
+    });
+</script>-->
+<!--示例2：class的数组绑定，可绑定多个class类名 end-->
+
+
+<!--示例3：样式的style绑定-->
+<div id="app"
+     @click="handleDivClick"
+     :style="[styleObj,{fontSize:'50px'}]">
+    hello world
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            styleObj:{
+                color: 'black'
+            }
+        },
+        methods:{
+            handleDivClick(){
+                this.styleObj.color=this.styleObj.color==='black'?'red':'black';
+            }
+        }
+    });
+</script>
+<!--示例3：样式的style绑定 end-->
+</body>
+</html>
