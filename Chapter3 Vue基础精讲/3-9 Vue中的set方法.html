@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的set方法-数组</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="item of list">
+        {{item}}
+    </div>
+</div>
+<script>
+    /**
+     * 1.Vue全局方法
+     * Vue.set(vm.list,1,'e')
+     *
+         a
+         e
+         c
+         d
+     *
+     * 2.Vue实例方法$set
+     * vm.$set(vm.list,4,'f')
+     *
+         a
+         e
+         c
+         d
+         f
+     *
+     *
+     * 3.总结：Vue中改变数组方法有3种
+     * 1）改变数组的引用
+     * 2）Vue中数组的7个变异方法
+     * 3）使用Vue.set全局方法或vm.$set实例方法
+     * */
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            list:['a','b','c','d']
+        }
+    });
+</script>
+</body>
+</html>

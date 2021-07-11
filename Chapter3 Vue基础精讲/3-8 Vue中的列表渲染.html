@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的列表渲染-数组</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    <div v-for="(item, index) of list"
+         :key="item.id">
+        {{item}}==={{index}}
+    </div>-->
+    <template v-for="(item, index) of list">
+        <div :key="item.id">{{item.id}}--{{index}}</div>
+        <span>{{item.text}}</span>
+    </template>
+</div>
+<script>
+    /**
+     * 1.为了提升列表渲染的性能，需要在每一个列表项上加一个唯一的key值
+     * 不推荐使用index作为key值，因为在频繁操作DOM元素相对应数据时，还是比较费性能的，可能使Vue无法充分复用DOM节点
+     * 一般使用后端返回的id值作为key值
+     *
+     * 2.Vue中改变数组的方法为数组变异方法：push,pop,shift,unshift,splice,sort,reverse，或者改变list数组的引用
+     * list.push({id:"splendid004"，text:"jacky") or
+     * vm.list=[
+                {
+                    id:"splendid001",
+                    text:"hello"
+                },{
+                    id:"splendid002",
+                    text:"dell"
+                },{
+                    id:"splendid003",
+                    text:"lee"
+                },{
+                    id:"splendid004",
+                    text:"jacky"
+                }
+            ]
+     *
+     * 3.<template></template>是模板占位符，可以帮助我们包裹一些元素，但是在循环过程中并不会真正渲染到页面上。
+     * template可以避免无用DOM的出现。
+     * Tip: template cannot be keyed. key需要放到真实的元素上去
+     * */
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            list:[
+                {
+                    id:"splendid001",
+                    text:"hello"
+                },{
+                    id:"splendid002",
+                    text:"dell"
+                },{
+                    id:"splendid003",
+                    text:"lee"
+                }
+            ]
+        }
+    });
+</script>
+</body>
+</html>
