@@ -54,25 +54,38 @@
                如<a v-on:click.once="doThis"></a>
          .passive
      *
-     * self要求
+     * .self要求
      * 只有触发事件的元素和绑定事件的元素相等时
      * 即点击的元素就是绑定了click事件的元素才会触发click事件,点击hello world不会触发,e.target=e.currentTarget时才会执行
+     * ps:
+     *   target：触发事件的元素。
+         currentTarget：事件绑定的元素。
+         两者在没有冒泡的情况下，是一样的值，但在用了事件委托的情况下，就不一样了.
+         参考示例: https://www.cnblogs.com/jcydd/p/10730007.html
      *
-     * once修饰符
+     *
+     * .once修饰符
      * 只会执行一次,触发后事件就会解绑
      *
      * 3.按键修饰符
-     * .enter 只有在按下enter键后才会触发keydown事件
+     * .enter
+            如<input v-on:keyup.enter="submit">,只有在 `key` 是 `Enter` 时调用 `vm.submit()`
      * .esc
      * .delete
      * .tab
      * ...
      *
-     * 4.系统修饰符
-     * .ctrl, .alt, .shift, .meta   必须同时按住ctrl等以上键才会触发keydown事件
+     * 4.系统修饰符,仅在按下相应按键时才触发鼠标或键盘事件的监听器
+     * .ctrl, .alt, .shift, .meta
      *
-     * 5.鼠标按钮修饰符
+     * 4.1 鼠标按钮修饰符
      * .left, .middle, right 只有点击鼠标左,中,右键才会响应事件
+     *
+     * 4.2 .exact修饰符
+     * .exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。
+         <button v-on:click.ctrl="onClick">A</button> 即使 Alt 或 Shift 被一同按下时也会触发
+         <button v-on:click.ctrl.exact="onCtrlClick">A</button> 有且只有 Ctrl 被按下的时候才触发
+         <button v-on:click.exact="onClick">A</button> 没有任何系统修饰符被按下的时候才触发
      * */
     let app = new Vue({
         el: "#app",

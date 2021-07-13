@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+</head>
+<body>
+<div id="root">
+<!--    <input type="text" v-model.lazy="value">-->
+<!--    <textarea v-model.lazy="value"></textarea>-->
+<!--    <input type="checkbox" v-model="value">-->
+<!--    <input type="radio" value="test" v-model="value">-->
+
+<!--注意在select上绑定v-model时,如果option上没有定义value属性,
+    那么v-model的value值就是option的innerText,否则是option的value属性值-->
+<!--    <select v-model="value">
+        <option disabled>&#45;&#45;请选择&#45;&#45;</option>
+        <option value="1">A</option>
+        <option value="2">B</option>
+        <option value="3">C</option>
+    </select>-->
+
+<!--    <input type="text" v-model.number="value">-->
+
+    <input type="text" v-model.trim="value">
+    {{value}}
+</div>
+<script>
+    /**
+     * 1.v-model在不同表单元素上的使用
+     * v-model 指令可以在表单 <input>、<textarea> 及 <select> 等元素上创建双向数据绑定
+     *
+     * 2.表单修饰符
+     * .lazy 一次性输入内容后,光标失去焦点才触发
+     * .number 表单输入的内容如果可以转换为number类型,就会尽量转成number类型存到value里
+     * .trim 去除字符串首尾空格后,再将这个值存入value里
+     * */
+    new Vue({
+        el:"#root",
+        data:{
+            value:""
+        },
+        watch:{
+            value(){
+                console.log(typeof this.value)
+            }
+        }
+    })
+</script>
+</body>
+</html>
