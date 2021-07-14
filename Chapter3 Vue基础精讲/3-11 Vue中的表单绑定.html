@@ -30,10 +30,12 @@
     /**
      * 1.v-model在不同表单元素上的使用
      * v-model 指令可以在表单 <input>、<textarea> 及 <select> 等元素上创建双向数据绑定
+     * v-model 会忽略所有表单元素的 value、checked、selected的 attribute 初始值而总是将 Vue 实例的数据作为数据来源。
+     * 你应该通过 JavaScript 在组件的 data 选项中声明初始值。
      *
      * 2.表单修饰符
-     * .lazy 一次性输入内容后,光标失去焦点才触发
-     * .number 表单输入的内容如果可以转换为number类型,就会尽量转成number类型存到value里
+     * .lazy 在change时而非input时更新. 一次性输入内容后,光标失去焦点才触发
+     * .number 表单输入的内容如果可以转换为number类型,就会尽量转成number类型存到value里. 如果这个值无法被 parseFloat() 解析，则会返回原始的值。
      * .trim 去除字符串首尾空格后,再将这个值存入value里
      * */
     new Vue({
