@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+</head>
+<body>
+<div id="root">
+    <child :content="'hello'"></child>
+</div>
+<script>
+    /**
+     * 1.Props特性:
+     * 当父组件使用子组件时,通过属性向子组件传值,子组件恰好在props中声明了对父组件传过来属性的接收,这叫props特性
+     * props特性中,html标签中不会显示该属性
+     *
+     * props除了定义成数组形式,还可以定义成对象形式,对接收的属性进行详细的定义
+     *
+     * content写法一
+     * content:String 表示子组件只能接收String类型数据,若父组件传数字等其他类型则会报错
+     *
+     * content写法二
+     * content:[String, Number] 数组形式,表示String或Number类型都可以
+     *
+     * required: false 非必传,若父组件不传content这个属性也没事
+     * required: true 父组件必传该属性,不传会报错Missing required prop: "content"
+     *
+     * validator 自定义校验器function
+     *
+     * 2.非props特性
+     * 父组件向子组件传递了某属性,子组件没有在props中声明接收,但是却使用了,这样就会报错
+     * 非props特性,父组件传的属性会显示在子组件最外层DOM元素的html标签上
+     * */
+    Vue.component("child",{
+        props:{
+            // content:[String, Number]
+            content:{
+                type: String
+                // required: true,
+                // default:'default value'
+                // validator: function(value){
+                //     return (value.length>5)
+                // }
+            }
+        },
+        template:"<div>{{content}}</div>"
+    })
+
+    new Vue({
+        el:"#root",
+        data:{
+        }
+    })
+</script>
+</body>
+</html>
