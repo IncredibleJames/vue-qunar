@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+    <style>
+        .header{
+            color: red;
+        }
+        .footer{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <!--若不使用插槽,这样写比较low,当有大量DOM插入时代码可读性可维护性差-->
+    <!--<body-content content="<h1>dell</h1>"></body-content>-->
+
+    <!--具名slot用法-->
+    <body-content>
+        <div class="header" slot="header">this is header</div>
+        <div class="footer" slot="footer">this is footer</div>
+    </body-content>
+</div>
+<script>
+    /**
+     * 1.当子组件有一部分内容是根据父组件传过来DOM进行显示时,就需要使用插槽
+     * 2.插槽只有一个,当要传多个插槽时需要使用具名插槽
+     * 3.slot显示的内容就是父组件向子组件插入的一段标签
+     * 4.slot可以在<slot>标签内部定义默认值,父组件不传插槽内容,就会显示子组件中插槽默认内容
+     */
+    Vue.component("body-content",{
+        template:`
+            <div>
+                <slot name="header"></slot>
+                <div>this is content</div>
+                <slot name="footer"></slot>
+            </div>`
+    })
+    new Vue({
+        el:"#root",
+        data:{
+        }
+    })
+</script>
+</body>
+</html>
