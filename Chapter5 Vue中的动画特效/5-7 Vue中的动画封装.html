@@ -24,6 +24,10 @@
     <button type="button" @click="handleBtnClick">Toggle</button>
 </div>
 <script>
+    /**
+     * template的slot中v-show不起作用,v-if才有用的原因:
+     * v-show不会销毁重建dom，所以css的样式不会触发改变，就没有动画效果了
+     */
     Vue.component("fade",{
         props:['show'],
         template:`
