@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+    <style>
+        .v-enter{
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <fade :show="show">
+        <div>hello world</div>
+    </fade>
+    <fade :show="show">
+        <h1>bye world</h1>
+    </fade>
+    <button type="button" @click="handleBtnClick">Toggle</button>
+</div>
+<script>
+    Vue.component("fade",{
+        props:['show'],
+        template:`
+            <transition
+              @before-enter="handleBeforeEnter"
+              @enter="handleEnter"
+              @after-enter="handleAfterEnter"
+            >
+                <slot v-if="show"></slot>
+            </transition>
+        `,
+        methods:{
+            handleBeforeEnter(el){
+                el.style.color='#f00'
+            },
+            handleEnter(el,done){
+                setTimeout(()=>{
+                    el.style.color='#0f0'
+                }, 2000)
+
+                setTimeout(()=>{
+                    done()
+                }, 4000)
+            },
+            handleAfterEnter(el){
+                el.style.color='#000'
+                console.log('动画结束')
+            }
+        }
+    })
+    new Vue({
+        el:"#root",
+        data:{
+            show: true
+        },
+        methods:{
+            handleBtnClick(){
+                this.show=!this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

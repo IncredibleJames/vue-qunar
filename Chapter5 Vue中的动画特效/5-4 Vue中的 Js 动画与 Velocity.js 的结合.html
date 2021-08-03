@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src='../lib/vue.js'></script>
+    <script src='../lib/velocity.min.js'></script>
 </head>
 <body>
 <div id="root">
+    <!--Vue中提供了很多js动画钩子,如before-enter等-->
     <transition
             name="fade"
             @before-enter="handleBeforeEnter"
             @enter="handleEnter"
             @after-enter="handleAfterEnter"
         >
-        <div v-show="show">hello world</div>
+        <div v-if="show">hello world</div>
     </transition>
     <button type="button" @click="handleBtnClick">切换</button>
 </div>
@@ -27,22 +29,26 @@
             handleBtnClick(){
                 this.show=!this.show
             },
+            //el指动画包裹的div标签
             handleBeforeEnter(el){
-                el.style.color='#f00'
+                // el.style.color='#f00'
+                el.style.opacity=0
             },
             handleEnter(el, done){
-                setTimeout(function(){
+                /*setTimeout(function(){
                     el.style.color='#0f0'
                 },2000)
 
                 setTimeout(function(){
                     done()
-                },4000)
+                },4000)*/
+                Velocity(el, {opacity:1},{duration:1000,complete:done})
             },
             handleAfterEnter(el){
-                el.style.color='#000'
+                // el.style.color='#000'
+                console.log('动画结束')
             }
-        },
+        }
     })
 </script>
 </body>
