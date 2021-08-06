@@ -19,7 +19,14 @@
         <div v-for="item of list" :key="item.id">{{item.title}}</div>
     </transition-group>
 
-    <!--transition-group标签包裹列表相当于对列表每一项包裹transition标签,如:
+    <!--
+    <transition-group>组件特点:
+        1.不同于 <transition>，它会以一个真实元素呈现：默认为一个 <span>。你也可以通过 tag attribute 更换为其他元素。
+        2.过渡模式不可用，因为我们不再相互切换特有的元素。
+        3.内部元素总是需要提供唯一的 key attribute 值。
+        4.CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
+
+    transition-group标签包裹列表相当于对列表每一项包裹transition标签,如:
 
        <transition>
         <div>hello world</div>

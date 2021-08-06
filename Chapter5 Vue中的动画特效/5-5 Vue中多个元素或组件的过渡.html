@@ -17,7 +17,10 @@
 </head>
 <body>
 <div id="root">
-    <!--transition 默认动画是in-out(先显示后隐藏), 可以通过mode设置为out-in(先隐藏后显示)-->
+    <!--Vue 提供了过渡模式:
+            in-out：新元素先进行过渡，完成之后当前元素过渡离开。
+            out-in：当前元素先进行过渡，完成之后新元素过渡进入。
+    -->
     <transition mode="out-in">
         <div v-if="show" key="hello">hello world</div>
         <div v-else key="bye">bye world</div>
