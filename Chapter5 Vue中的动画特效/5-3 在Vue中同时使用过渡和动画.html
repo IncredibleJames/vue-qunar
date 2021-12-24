@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+    <link rel="stylesheet" href="../lib/animate.css">
+    <style>
+        .fade-enter,
+        .fade-leave-to{
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <!--transition标签中:
+        1.type="transition" 默认动画执行时间以transition时间为准(animated动画默认duration为1s).
+            使用 type attribute 并设置 animation 或 transition 来明确声明你需要 Vue 监听的类型。
+        2.appear 设置节点在初始渲染的过渡
+        3.定制显性的过渡持续时间=> :duration="{enter: 5000, leave: 10000}" 入场动画执行5s,离场动画执行10s
+    -->
+    <transition
+            :duration="{enter: 5000, leave: 10000}"
+            name="fade"
+            appear
+            enter-active-class="animated swing fade-enter-active"
+            leave-active-class="animated shake fade-leave-active"
+            appear-active-class="animated swing"
+        >
+        <div v-show="show">hello world</div>
+    </transition>
+    <button type="button" @click="handleBtnClick">切换</button>
+</div>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            show: true
+        },
+        methods:{
+            handleBtnClick(){
+                this.show=!this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

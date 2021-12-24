@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+    <style>
+        .fade-enter,
+        .fade-leave-to{
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <!--在元素外侧包裹transition标签,Vue会自动为该元素构建一个过渡动画.
+        当不写transition的name时,Vue默认为元素添加的类名为v-enter等等.
+
+        当插入或删除包含在 transition 组件中的元素时，Vue 将会做以下处理：
+        1)自动嗅探目标元素是否应用了 CSS 过渡或动画，如果是，在恰当的时机添加/删除 CSS 类名。
+        2)如果过渡组件提供了 JavaScript 钩子函数，这些钩子函数将在恰当的时机被调用。
+        3)如果没有找到 JavaScript 钩子并且也没有检测到 CSS 过渡/动画，DOM 操作 (插入/删除) 在下一帧中立即执行。(注意：此指浏览器逐帧动画机制，和 Vue 的 nextTick 概念不同)
+    -->
+    <transition name="fade">
+        <div v-if="show">hello world</div>
+    </transition>
+    <button type="button" @click="handleBtnClick">切换</button>
+</div>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            show: true
+        },
+        methods:{
+            handleBtnClick(){
+                this.show=!this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

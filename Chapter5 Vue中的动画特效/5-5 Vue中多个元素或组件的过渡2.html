@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多个组件过渡动画</title>
+    <script src='../lib/vue.js'></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <transition mode="out-in">
+        <component :is="type"></component>
+    </transition>
+    <button type="button" @click="handleBtnClick">切换</button>
+</div>
+<script>
+    Vue.component("child",{
+        template:"<div>child</div>"
+    })
+    Vue.component("child-one",{
+        template:"<div>child-one</div>"
+    })
+    new Vue({
+        el:"#root",
+        data:{
+            type: 'child'
+        },
+        methods:{
+            handleBtnClick(){
+                this.type=this.type==='child'?'child-one':'child'
+            }
+        }
+    })
+</script>
+</body>
+</html>

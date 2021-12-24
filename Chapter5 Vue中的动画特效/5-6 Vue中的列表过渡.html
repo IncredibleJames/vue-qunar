@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='../lib/vue.js'></script>
+    <style>
+        .v-enter{
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <transition-group>
+        <div v-for="item of list" :key="item.id">{{item.title}}</div>
+    </transition-group>
+
+    <!--
+    <transition-group>组件特点:
+        1.不同于 <transition>，它会以一个真实元素呈现：默认为一个 <span>。你也可以通过 tag attribute 更换为其他元素。
+        2.过渡模式不可用，因为我们不再相互切换特有的元素。
+        3.内部元素总是需要提供唯一的 key attribute 值。
+        4.CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身。
+
+    transition-group标签包裹列表相当于对列表每一项包裹transition标签,如:
+
+       <transition>
+        <div>hello world</div>
+       </transition>
+
+       <transition>
+        <div>hello world</div>
+       </transition>
+
+       <transition>
+        <div>hello world</div>
+       </transition>
+
+       因此.v-enter,.v-enter-active等class能产生过渡效果.
+    -->
+    <button type="button" @click="handleAddClick">Add</button>
+</div>
+<script>
+    new Vue({
+        el:"#root",
+        data:{
+            count:0,
+            list:[]
+        },
+        methods:{
+            handleAddClick(){
+                this.list.push({
+                    id:this.count++,
+                    title:"hello world"
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
