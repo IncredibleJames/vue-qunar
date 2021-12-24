@@ -13,11 +13,11 @@
     </div>
     <script>
         Vue.component('Item',{
-            props:['content','ele'],
+            props:['ele'],
             template:'<li @click="handleItemClick">{{ele}}</li>',
             methods:{
                 handleItemClick(){
-                   this.$emit("click")
+                   this.$emit("click", this.ele)
                 }
             }
         })
@@ -35,8 +35,8 @@
                 list:['hello','ios']
             },
             methods:{
-                handleClick(){
-                    alert('li clicked!!!')
+                handleClick(arg){
+                    alert(arg + ' clicked!!!')
                 }
             }
         });

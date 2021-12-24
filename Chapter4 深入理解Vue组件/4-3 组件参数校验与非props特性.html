@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="root">
-    <child :content="'hello'"></child>
+    <child :content="hello"></child>
 </div>
 <script>
     /**
@@ -36,12 +36,12 @@
         props:{
             // content:[String, Number]
             content:{
-                type: String
+                type: String,
                 // required: true,
                 // default:'default value'
-                // validator: function(value){
-                //     return (value.length>5)
-                // }
+                validator: function(value){
+                    return (value.length>5)
+                }
             }
         },
         template:"<div>{{content}}</div>"
@@ -50,6 +50,7 @@
     new Vue({
         el:"#root",
         data:{
+            hello:'123456'
         }
     })
 </script>
